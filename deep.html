@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aplus Academy - The Best Online Learning Platform</title>
+  <link rel="stylesheet" href="deep.css">
+  <script src="deep.js">deep.js</script>
+</head>
+
+<body>
+  <!-- Header with semantic tag -->
+  <header id="top">
+    <h1>Aplus Academy</h1>
+    <p class="subtitle">Since 2017 E.C</p>
+  </header>
+
+  <!-- Social Media Section -->
+  <section class="social-media" aria-label="Social media links">
+    <h2>Learn on our social media platforms</h2>
+    <div class="social-links">
+      <a class="social-link youtube" href="http://www.youtube.com/@aplusacademy1" target="_blank" rel="noopener">
+        <span>YouTube</span>
+      </a>
+      <a class="social-link telegram" href="https://t.me/aplusacademy11" target="_blank" rel="noopener">
+        <span>Telegram</span>
+      </a>
+      <a class="social-link tiktok" href="https://www.tiktok.com/@new_tech26" target="_blank" rel="noopener">
+        <span>TikTok</span>
+      </a>
+      <a class="social-link instagram" href="https://www.instagram.com/aplusacademy1/" target="_blank" rel="noopener">
+        <span>Instagram</span>
+      </a>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <div class="logo-text">
+        <h2>Welcome!</h2>
+        <p>Aplus Academy is the best online learning platform.</p>
+        <p class="handle">@aplusacademy1</p>
+      </div>
+      
+      <div class="logo-image">
+        <h2>We are excited to help you</h2>
+        <!-- Changed to relative path -->
+        <img src="images/logo.jpg" alt="Aplus Academy Logo - Quality Education for Ethiopian Freshmen" />
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="videos-section">
+      <h2 style="color: brown; font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;">
+        Watch our introductory videos below:
+      </h2>
+      
+      <div class="video-gallery">
+        <!-- Changed to relative paths -->
+        <div class="video-container">
+          <video controls width="300">
+            <source src="videos/intro-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p class="video-caption">Welcome to Aplus Academy</p>
+        </div>
+        
+        <div class="video-container">
+          <video controls width="300">
+            <source src="videos/day3-tutorial.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p class="video-caption">Day 3: Programming Fundamentals</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="registration-section">
+      <h2>Join Our Academy</h2>
+      <p>Complete the form below to become a member of our Academy.</p>
+      
+      <form id="registration-form">
+        <fieldset>
+          <legend>Personal Information</legend>
+          
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter a strong password" minlength="8" required>
+            <small class="hint">Minimum 8 characters with letters and numbers</small>
+          </div>
+          
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="radio-group">
+              <input type="radio" id="male" name="gender" value="male" required>
+              <label for="male">Male</label>
+              
+              <input type="radio" id="female" name="gender" value="female" required>
+              <label for="female">Female</label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" min="16" max="50" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select your country</option>
+              <option value="ethiopia">Ethiopia</option>
+              <option value="kenya">Kenya</option>
+              <option value="uganda">Uganda</option>
+              <option value="tanzania">Tanzania</option>
+              <option value="somalia">Somalia</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="button-group">
+            <button type="submit" class="submit-btn">Join Now</button>
+            <button type="reset" class="reset-btn">Clear Form</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <h1>About Aplus Academy</h1>
+      <p class="established">Established in 2025</p>
+      <p class="tagline">The best learning platform forever</p>
+      
+      <div class="founder-note">
+        <h3>From the Founder</h3>
+        <p><strong>My name is Yitbarek, the owner of this channel. I created it to support my juniors.</strong></p>
+      </div>
+      
+      <div class="mission">
+        <h3>Our Mission</h3>
+        <p>Welcome to Aplus Academy – your go-to destination for top-notch academic support tailored specifically for Ethiopian freshmen! At Aplus Academy, we empower Ethiopian freshmen to excel academically and build strong foundations for their future. Our expert-led tutorials simplify complex subjects, from English and Mathematics to Science and Technology, making learning engaging and effective.</p>
+        <p>Whether you're preparing for exams, strengthening your skills, or exploring new knowledge, Aplus Academy provides clear guidance, practical examples, and a supportive community. Join thousands of students who are transforming their academic journey and achieving success with us.</p>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+      <h2>What You'll Get</h2>
+      <ul class="resources-list">
+        <li>Real Midterm Exams</li>
+        <li>Previous Year Final Exams</li>
+        <li>Freshmen Tutorials</li>
+        <li>A+ Study Tips</li>
+        <li>Campus Survival Advice</li>
+      </ul>
+    </section>
+
+    <!-- Subjects Table -->
+    <section class="subjects-section">
+      <h2>Subjects We Offer</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Subject</th>
+              <th>Credit Hour</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mathematics</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Communicative English</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Computer Programming</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Logic and Philosophy</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>History, Anthropology, Geography</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <div class="cta-links">
+        <a href="http://www.youtube.com/@aplusacademy1" class="cta-link" target="_blank">
+          <span>Learn on YouTube</span>
+        </a>
+        <a href="#contact" class="cta-link">
+          <span>Give Feedback</span>
+        </a>
+        <a href="#help" class="cta-link">
+          <span>Get Help</span>
+        </a>
+        <a href="https://t.me/aplus_academy_2018" class="cta-link" target="_blank">
+          <span>Join Our Telegram Community</span>
+        </a>
+        <div class="thanks">Thanks for visiting!</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Aplus Academy | All Rights Reserved</p>
+      <p class="footer-note">Empowering Ethiopian students for academic excellence</p>
+    </div>
+  </footer>
+
+</body>
+</html>
