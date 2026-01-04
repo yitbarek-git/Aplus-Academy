@@ -178,8 +178,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function showEthiopianWelcome(name) {
         const welcomeMessages = [
-            `ሰላም ${name}! Welcome to Aplus Academy! በዚህ አካዳሚ ውስጥ እንደሚያምር ተስፋ እናደርጋለን!`,
-            `እንኳን ወደ Aplus Academy በደህና መጡ ${name}! ለኢትዮጵያ ተማሪዎች የተመረጠ ትምህርት!`,
+            `ሰላም ${name}! Welcome to Aplus Academy! Your journey to success starts here!`,
+            `እንኳን ወደ Aplus Academy በደህና መጡ ${name}! Quality Education for Ethiopian Students!`,
             `ደህና መጡ ${name}! Together we'll achieve academic excellence!`
         ];
         
@@ -241,7 +241,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 box-shadow: 0 8px 25px rgba(0,0,0,0.1);
                 border-top: 5px solid #4c6ef5;
             ">
-                <h3 style="color: #4c6ef5; margin-top: 0; text-align: center;">
+                
+            
+            <h3 style="color: #4c6ef5; margin-top: 0; text-align: center;">
                     📚 Online Learning Resources
                 </h3>
                 <p style="text-align: center; color: #666; margin-bottom: 25px;">
@@ -348,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             Follow for Updates
                         </button>
                     </div>
-                </div>
+                </div> 
                 
                 <div style="margin-top: 25px; padding: 15px; background: #f0f7ff; border-radius: 10px; text-align: center;">
                     <p style="margin: 0; color: #4c6ef5; font-weight: bold;">
@@ -458,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showVideoCompletion(videoNumber) {
         const messages = [
             "Great job! Ready for the next lesson?",
-            "በጣም ጥሩ! የቀጠለ ትምህርት ይመልከቱ!",
+            "በጣም ጥሩ! see the next video.!",
             "Excellent! Check our Telegram for more resources."
         ];
         
@@ -568,7 +570,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         text-align: center;
                     ">
                         <div style="font-weight: bold; color: #4c6ef5;">Monday</div>
-                        <div style="font-size: 0.9em; margin-top: 5px;">Math & English</div>
+                        <div style="font-size: 0.9em; margin-top: 5px;">Discrete Math & communicative English</div>
                     </div>
                     
                     <div class="study-day" style="
@@ -578,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         text-align: center;
                     ">
                         <div style="font-weight: bold; color: #4c6ef5;">Tuesday</div>
-                        <div style="font-size: 0.9em; margin-top: 5px;">Programming</div>
+                        <div style="font-size: 0.9em; margin-top: 5px;">computer Programming basics</div>
                     </div>
                     
                     <div class="study-day" style="
@@ -608,9 +610,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         text-align: center;
                     ">
                         <div style="font-weight: bold; color: #4c6ef5;">Friday</div>
+                        <div style="font-size: 0.9em; margin-top: 5px;">Economics, entrepreneurship</div>
+                    </div>
+
+                    <div class="study-day" style="
+                        background: #e8f4ff;
+                        padding: 15px;
+                        border-radius: 10px;
+                        text-align: center;
+                    ">
+                        <div style="font-weight: bold; color: #4c6ef5;">Saturday and sunday</div>
                         <div style="font-size: 0.9em; margin-top: 5px;">Review & Practice</div>
                     </div>
                 </div>
+                <br>
+                
                 
                 <div style="
                     background: #f0fff0;
@@ -620,7 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     border-left: 4px solid #4CAF50;
                 ">
                     <p style="margin: 0; color: #2E7D32; font-weight: bold;">
-                        💡 Ethiopian Freshmen Tip: Follow this weekly plan and join our 
+                        💡 Ethiopian students Tip: Follow this weekly plan and join our 
                         <a href="https://t.me/aplusacademy11" style="color: #0088cc;">
                             Telegram group
                         </a> 
@@ -689,28 +703,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0;">
                     <div style="background: #078930; color: white; padding: 10px; border-radius: 8px;">
-                        <div style="font-size: 1.2em; font-weight: bold;">A</div>
+                        <div style="font-size: 1.2em; font-weight: bold;">A+</div>
                         <div style="font-size: 0.9em;">4.0 (90-100%)</div>
                     </div>
-                    
-                    <div style="background: #4c6ef5; color: white; padding: 10px; border-radius: 8px;">
-                        <div style="font-size: 1.2em; font-weight: bold;">B</div>
-                        <div style="font-size: 0.9em;">3.0 (80-89%)</div>
+
+                    <div style="background: #2E7D32; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">A</div>
+                        <div style="font-size: 0.9em;">4.0 (85-90%)</div>
+                    </div>
+                  <div style="background: #4c6ef5; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">A-</div>
+                        <div style="font-size: 0.9em;">3.96 (80-85%)</div>
                     </div>
                     
-                    <div style="background: #FFC107; color: #333; padding: 10px; border-radius: 8px;">
-                        <div style="font-size: 1.2em; font-weight: bold;">C</div>
-                        <div style="font-size: 0.9em;">2.0 (70-79%)</div>
+                    <div style="background: #e4e2dbff; color: #333; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">B+</div>
+                        <div style="font-size: 0.9em;">3.92 (75-80%)</div>
                     </div>
-                    
                     <div style="background: #f44336; color: white; padding: 10px; border-radius: 8px;">
-                        <div style="font-size: 1.2em; font-weight: bold;">F</div>
-                        <div style="font-size: 0.9em;">0.0 (Below 60%)</div>
+                        <div style="font-size: 1.2em; font-weight: bold;">B</div>
+                        <div style="font-size: 0.9em;">3.83 (70-75%)</div>
                     </div>
                 </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0;">
+                    <div style="background: #ff9800; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">B-</div>
+                        <div style="font-size: 0.9em;">3.5 (65-70%)</div>
+                    </div>
+                 <div style="background: #ff5722; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">C+</div>
+                        <div style="font-size: 0.9em;">3.0 (60-65%)</div>
+                    </div>
+                    <div style="background: #e91e63; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">C</div>
+                        <div style="font-size: 0.9em;">2.5 (50-60%)</div>
+                    </div>
+                    <div style="background: #ff4081; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">C-</div>
+                        <div style="font-size: 0.9em;">2.25 (45-50%)</div>
+                    </div>
+                    <div style="background: #9c27b0; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">D</div>
+                        <div style="font-size: 0.9em;">2.0 (45-50%)</div>
+                    </div>
+                    <div style="background: #607d8b; color: white; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.2em; font-weight: bold;">F</div>
+                        <div style="font-size: 0.9em;">0.0 (0-45%)</div>
+                    </div>
+                </div>
+
                 
                 <p style="margin: 15px 0; font-weight: bold;">
-                    ማስታወሻ: Minimum CGPA to graduate is 2.00
+                    Note: Minimum CGPA to graduate is 2.00
                 </p>
                 
                 <button id="calculate-gpa" style="
@@ -723,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     cursor: pointer;
                     margin-top: 10px;
                 ">
-                    📊 Calculate Your GPA
+                    📊 Calculate Your GPA!
                 </button>
             </div>
         `;
@@ -770,13 +814,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             <input type="text" placeholder="Course Name (e.g., Mathematics)" class="course-name" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                             <input type="number" placeholder="Credit" class="course-credit" min="1" max="5" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                             <select class="course-grade" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                                <option value="4">A (4.0)</option>
-                                <option value="3.5">A- (3.5)</option>
-                                <option value="3">B (3.0)</option>
-                                <option value="2.5">B- (2.5)</option>
-                                <option value="2">C (2.0)</option>
-                                <option value="1.5">C- (1.5)</option>
-                                <option value="1">D (1.0)</option>
+                                <option value="4">A+ (4.0)</option>
+                                <option value="3.5">A (4.0)</option>
+                                <option value="3">A-(3.96)</option>
+                                <option value="2.5">B+ (3.92)</option>
+                                <option value="2">B (3.83)</option>
+                                <option value="1.5">B- (3.5)</option>
+                                <option value="1">D (2.0)</option>
                                 <option value="0">F (0.0)</option>
                             </select>
                         </div>
@@ -902,7 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (gpa >= 3.0) {
             message = 'Very Good! Keep it up! 👍';
             color = '#4c6ef5';
-        } else if (gpa >= 2.0) {
+        } else if (gpa >= 2.5) {
             message = 'Good! You are on track! 💪';
             color = '#FFC107';
         } else {
@@ -935,6 +979,7 @@ document.addEventListener('DOMContentLoaded', function() {
         countdownDiv.className = 'exam-countdown';
         countdownDiv.innerHTML = `
             <div style="
+            
                 background: linear-gradient(135deg, #ff6b6b, #ee5a52);
                 color: white;
                 padding: 25px;
@@ -1000,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     margin-top: 20px;
                 ">
                     <p style="margin: 0; font-weight: bold;">
-                        📚 Study Tip: Complete 2 chapters per week to be ready!
+                        📚 Study Tip: Complete at least 4 chapters per week to be ready!
                     </p>
                 </div>
             </div>
@@ -1018,10 +1063,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeRemaining = examDate - now;
         
         if (timeRemaining > 0) {
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            const days = Math.floor(timeRemaining / (2000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (100 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (100 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (100 * 60)) / 1000);
             
             // Update display
             const daysEl = document.getElementById('days');
@@ -1053,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 border-top: 5px solid #4c6ef5;
             ">
                 <h3 style="color: #4c6ef5; margin-top: 0; text-align: center;">
-                    🧠 Quick Quiz: Ethiopian Freshmen Edition
+                    🧠 general Quiz: Ethiopian  Higher Education Edition
                 </h3>
                 
                 <div id="quiz-container" style="margin: 25px 0;">
@@ -1065,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         font-weight: bold;
                         font-size: 1.1em;
                     ">
-                        What is the minimum CGPA required to graduate from Ethiopian universities?
+                        which Ethiopian university is well known in its technology departments?
                     </div>
                     
                     <div id="quiz-options" style="display: grid; gap: 10px;">
@@ -1077,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             text-align: left;
                             cursor: pointer;
                             transition: all 0.3s;
-                        ">1.50</button>
+                        ">Addis Ababa University</button>
                         
                         <button class="quiz-option" data-correct="true" style="
                             background: white;
@@ -1087,7 +1132,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             text-align: left;
                             cursor: pointer;
                             transition: all 0.3s;
-                        ">2.00</button>
+                        ">Bahir Dar University</button>
                         
                         <button class="quiz-option" data-correct="false" style="
                             background: white;
@@ -1097,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             text-align: left;
                             cursor: pointer;
                             transition: all 0.3s;
-                        ">2.50</button>
+                        ">Gondar university</button>
                         
                         <button class="quiz-option" data-correct="false" style="
                             background: white;
@@ -1107,7 +1152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             text-align: left;
                             cursor: pointer;
                             transition: all 0.3s;
-                        ">3.00</button>
+                        "> Jimma university</button>
                     </div>
                 </div>
                 
@@ -1152,8 +1197,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentQuestion = 0;
         const questions = [
             {
-                question: "What is the minimum CGPA required to graduate from Ethiopian universities?",
-                options: ["1.50", "2.00", "2.50", "3.00"],
+                question: "Which Ethiopian university is well known in its technology departments?",
+                options: ["Addis Ababa University", "Bahir Dar University", "Gondar University", "unlisted"],
                 correct: 1
             },
             {
@@ -1206,9 +1251,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             border-left: 5px solid #dc3545;
                         ">
                             <span style="font-size: 1.5em;">❌</span>
-                            <strong>Not quite right.</strong> እባክህ እንደገና ሞክር!
+                            <strong>Not quite right.</strong> try again! please.
                             <p style="margin: 10px 0 0 0; font-size: 0.9em;">
-                                The correct answer is 2.00 CGPA. Check our resources to learn more!
+                                The correct answer is highlighted in green.
                             </p>
                         </div>
                     `;
@@ -1332,11 +1377,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let greeting = '';
         
         if (hours < 12) {
-            greeting = 'Good Morning! እንደምን አደርክ?';
+            greeting = 'Good Morning!';
         } else if (hours < 18) {
-            greeting = 'Good Afternoon! እንዴት ነህ?';
+            greeting = 'Good Afternoon! ';
         } else {
-            greeting = 'Good Evening! መልካም ምሽት!';
+            greeting = 'Good Evening!';
         }
         
         // Add greeting to header
@@ -1440,7 +1485,7 @@ function addLanguageSwitcher() {
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
-        ">አማ</button>
+        ">Am</button>
     `;
     
     header.style.position = 'relative';
