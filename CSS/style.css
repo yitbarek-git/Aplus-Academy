@@ -1,52 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
-
-/* CSS VARIABLES / THEME */
-:root {
-  --bg: #000;
-  --text: #fff;
-  --primary: #3b82f6; 
-  --primary-dark: #2563eb; 
-  --primary-light: #93c5fd; 
-  --nav-bg: #121217;
-  --card-bg: #1a1a24;
-  --border-color: #333;
-  --cl-yellow: #f1c40f;
-  --shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-  --shadow-lg: 0 20px 40px rgba(59, 130, 246, 0.3);
-  --transition: all 0.3s ease;
-}
-
-body.light {
-  --bg: #e5e5c6;
-  --text: #222;
-  --nav-bg: #e5e5c6;
-  --card-bg: #ffffff;
-  --border-color: #ddd;
-  --primary: #1e64d4;
-  --primary-dark: #154d9e;
-  --primary-light: #6fa3f0;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* GLOBAL RESET & BASE */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* to Prevent header from covering content */
-}
-
 body {
-  width: 100%;
-  background: var(--bg);
+  width: 100%; 
+  background: linear-gradient(green, yellow, red);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text);
   font-family: "Poppins", sans-serif;
   line-height: 1.6;

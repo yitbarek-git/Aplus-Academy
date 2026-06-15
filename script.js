@@ -64,7 +64,7 @@
     const formGroup = field.closest(".form-group");
     const errorEl = formGroup && formGroup.querySelector(".error");
     if (errorEl) errorEl.textContent = "";
-  }
+  }n
 
   // ---------- Mobile menu ----------
   function initMobileMenu() {
@@ -342,7 +342,7 @@
 
     function animateCounter(counter, target) {
       let start = 0;
-      const duration = 2000;
+      const duration = 1800;
       const stepTime = 20;
       const steps = duration / stepTime;
       const increment = target / steps;
