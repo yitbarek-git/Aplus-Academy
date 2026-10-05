@@ -64,7 +64,7 @@
     const formGroup = field.closest(".form-group");
     const errorEl = formGroup && formGroup.querySelector(".error");
     if (errorEl) errorEl.textContent = "";
-  }n
+  }
 
   // ---------- Mobile menu ----------
   function initMobileMenu() {

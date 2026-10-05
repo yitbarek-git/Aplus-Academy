@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,12 +12,15 @@
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
   </head>
 
+
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
 
     <!-- ===== HEADER ===== -->
     <header class="site-header">
       <a href="#" class="logo" onclick="showPage('home')">Aplus <span>Academy</span></a>
+
+
       <nav aria-label="Main navigation">
         <ul class="nav-links">
           <li><a href="#" onclick="showPage('terms')" id="nav-terms">Terms</a></li>
@@ -24,6 +28,8 @@
           <li><a href="#" onclick="showPage('contact')">Contact</a></li>
         </ul>
       </nav>
+
+
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">☀️ Light Mode</button>
     </header>
 
@@ -43,7 +49,6 @@
     </footer>
 
     <script>
-      // ===== PAGE CONTENT DEFINITIONS =====
       const pages = {
         terms: `
         <h1>Terms and Conditions</h1>

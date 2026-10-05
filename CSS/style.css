@@ -27,34 +27,15 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.logo {
-  font-size: 3rem;
-  text-decoration: none;
-  font-weight: 900;
-  color: var(--primary);
+.logo img {
+  width: 30px;
+  border-radius: 50%;
   cursor: pointer;
   transition: transform 0.5s ease;
 }
 
 .logo:hover {
   transform: scale(1.1);
-}
-
-.logo img {
-  height: 70px;
-  width: auto;
-  object-fit: contain;
-  transition: 0.3s ease;
-  border-radius: 50%;
-}
-
-.logo img:hover {
-  transform: scale(1.05);
-}
-@media (max-width: 600px) {
-  .logo img {
-    height: 35px;
-  }
 }
 
 #theme-toggle {
@@ -70,7 +51,61 @@ body {
   transform: rotate(20deg) scale(1.1);
 }
 
+/* Desktop Navigation */
+.navbar ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 3rem;
+}
 
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+  width: 100%;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--primary);
+}
+
+.nav-cta {
+  background: var(--primary);
+  color: #000 !important;
+  padding: 1rem 2rem !important;
+  border-radius: 3rem;
+  font-weight: 600;
+}
+
+.nav-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.nav-cta::after {
+  display: none;
+}
 
 /* Mobile Menu Button */
 #menu-btn {
@@ -101,11 +136,70 @@ body {
 #menu-btn.open span:nth-child(3) {
   transform: rotate(-45deg) translate(8px, -8px);
 }
+
+/* MOBILE RESPONSIVE NAV*/
+@media (max-width: 990px) {
+  .header {
+    padding: 1rem 5%;
+  }
+
+  #menu-btn {
+    display: flex;
+  }
+
+  #theme-toggle {
+    margin: 0 1rem;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 61px);
+    background: var(--nav-bg);
+    padding: 2rem;
+    transition: 0.4s ease;
+    border-left: 2px solid var(--primary);
+    border-bottom: 1px dashed var(--primary);
+    border-top: 1px dashed var(--primary);
+    box-shadow: -5px 0 30px var(--shadow);
+  }
+
+  .navbar.active {
+    right: 0;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .navbar li {
+    width: 100%;
+  }
+
+  .navbar a {
+    display: block;
+    padding: 1rem;
+    font-size: 1.8rem;
+  }
+
+  .navbar a::after {
+    bottom: 0;
+  }
+
+  .nav-cta {
+    text-align: center;
+  }
+}
+
 /* Reveal Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease;
+  transform: translateY(80px);
+  transition: all 0.8s ease;
 }
 
 .reveal.active {
@@ -231,13 +325,7 @@ section {
   background: var(--primary);
   color: #000;
 }
-.btn-primary:hover,
-.btn-primary:active {
-  background: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  transition: all 1s ease;
-}
+
 .btn-primary:hover {
   background: var(--primary-dark);
   transform: translateY(-3px);
@@ -250,13 +338,6 @@ section {
   border: 2px solid var(--primary);
 }
 
-.btn-outline:hover,
-.btn-outline:active {
-  background: var(--primary);
-  color: #000;
-  transform: translateY(-3px);
-  transition: all 1s ease;
-}
 .btn-outline:hover {
   background: var(--primary);
   color: #000;
@@ -496,13 +577,11 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
 }
 
 .founder-card,
 .mission-card {
-  font-size: 1.3rem;
   background: var(--card-bg);
   padding: 3rem;
   border-radius: 20px;
@@ -563,8 +642,6 @@ section {
 }
 
 .about-image img {
-  width: 100%;
-  max-width: 400px;
   border-radius: 50%;
   border: 3px solid var(--primary);
   box-shadow: var(--shadow-lg);
@@ -728,13 +805,16 @@ textarea {
 .social-card.youtube {
   background: #ff0000;
 }
+
 .social-card.telegram {
   background: #0088cc;
 }
+
 .social-card.tiktok {
   background: #000000;
   position: relative;
 }
+
 .social-card.tiktok::after {
   content: "";
   position: absolute;
@@ -746,12 +826,14 @@ textarea {
   opacity: 0.5;
   z-index: 0;
 }
+
 .social-card.tiktok i,
 .social-card.tiktok span,
 .social-card.tiktok small {
   position: relative;
   z-index: 1;
 }
+
 .social-card.instagram {
   background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
 }
