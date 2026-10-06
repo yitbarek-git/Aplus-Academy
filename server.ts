@@ -9,7 +9,7 @@ import { db } from './server/db.ts';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const PORT = 3000;
 const IS_PROD = process.env.NODE_ENV === 'production';
 
@@ -438,7 +438,11 @@ async function startServer() {
   });
 }
 
-startServer().catch((err) => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
+if (process.env.VERCEL !== '1') {
+  startServer().catch((err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });
+}
+
+export default app;
