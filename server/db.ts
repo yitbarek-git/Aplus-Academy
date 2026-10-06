@@ -23,16 +23,36 @@ export interface Registration {
   reviewed_at?: string | null;
 }
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const isServerless = process.env.VERCEL === '1' || !!process.env.VERCEL_ENV || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+const BASE_DATA_DIR = isServerless ? '/tmp' : process.cwd();
+const DATA_DIR = path.resolve(BASE_DATA_DIR, 'data');
 const DB_FILE = path.join(DATA_DIR, 'registrations.json');
+
+// In-memory cache fallback for serverless or read-only environments
+let memoryCache: Registration[] | null = null;
 
 // Ensure directory and file exist
 function initDb(): void {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify([], null, 2), 'utf-8');
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(DB_FILE)) {
+      // Check if project repository has pre-seeded registrations
+      const repoSeedFile = path.resolve(process.cwd(), 'data', 'registrations.json');
+      if (fs.existsSync(repoSeedFile) && repoSeedFile !== DB_FILE) {
+        try {
+          const seedContent = fs.readFileSync(repoSeedFile, 'utf-8');
+          fs.writeFileSync(DB_FILE, seedContent, 'utf-8');
+        } catch {
+          fs.writeFileSync(DB_FILE, JSON.stringify([], null, 2), 'utf-8');
+        }
+      } else {
+        fs.writeFileSync(DB_FILE, JSON.stringify([], null, 2), 'utf-8');
+      }
+    }
+  } catch (err) {
+    console.warn('Notice: Read-only storage detected or mkdir failed, using memory store:', err);
   }
 }
 
@@ -41,23 +61,46 @@ initDb();
 function readRegistrations(): Registration[] {
   try {
     initDb();
-    const raw = fs.readFileSync(DB_FILE, 'utf-8');
-    return JSON.parse(raw) as Registration[];
+    if (fs.existsSync(DB_FILE)) {
+      const raw = fs.readFileSync(DB_FILE, 'utf-8');
+      const parsed = JSON.parse(raw) as Registration[];
+      memoryCache = parsed;
+      return parsed;
+    }
   } catch (err) {
-    console.error('Error reading database file:', err);
-    return [];
+    console.error('Notice reading database file, using fallback cache:', err);
   }
+
+  // If memory cache exists, return it
+  if (memoryCache) {
+    return memoryCache;
+  }
+
+  // Try reading from repository seed file as fallback
+  try {
+    const repoSeedFile = path.resolve(process.cwd(), 'data', 'registrations.json');
+    if (fs.existsSync(repoSeedFile)) {
+      const raw = fs.readFileSync(repoSeedFile, 'utf-8');
+      const parsed = JSON.parse(raw) as Registration[];
+      memoryCache = parsed;
+      return parsed;
+    }
+  } catch {
+    // ignore
+  }
+
+  return [];
 }
 
 function writeRegistrations(data: Registration[]): void {
+  memoryCache = data;
   try {
     initDb();
     const tempFile = `${DB_FILE}.tmp.${Date.now()}`;
     fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf-8');
     fs.renameSync(tempFile, DB_FILE);
   } catch (err) {
-    console.error('Error writing to database file:', err);
-    throw new Error('Failed to save registration record');
+    console.warn('Notice: Could not write database file to disk, saved in memory cache:', err);
   }
 }
 

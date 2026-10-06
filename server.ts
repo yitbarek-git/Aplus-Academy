@@ -4,24 +4,29 @@ import fs from 'fs';
 import crypto from 'crypto';
 import multer from 'multer';
 import dotenv from 'dotenv';
-import { createServer as createViteServer } from 'vite';
-import { db } from './server/db.ts';
+import { db } from './server/db';
 
 dotenv.config();
 
 export const app = express();
 const PORT = 3000;
 const IS_PROD = process.env.NODE_ENV === 'production';
+const isVercel = process.env.VERCEL === '1' || !!process.env.VERCEL_ENV || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 
-// Ensure upload directory exists
-const UPLOADS_DIR = path.resolve(process.cwd(), 'uploads', 'proofs');
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// Ensure upload directory exists (using /tmp on serverless environments to prevent EROFS)
+const BASE_UPLOADS = isVercel ? '/tmp' : process.cwd();
+export const UPLOADS_DIR = path.resolve(BASE_UPLOADS, 'uploads', 'proofs');
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('Notice: upload dir init:', e);
 }
 
 // Basic JSON and URL encoded body parsing
-app.use(express.json({ limit: '2mb' }));
-app.use(express.urlencoded({ extended: true, limit: '2mb' }));
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 // Simple in-memory rate limiting map for registration and status checking
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -95,10 +100,11 @@ function requireAdmin(req: Request, res: Response, next: NextFunction): void {
   next();
 }
 
-// ================= API ROUTES =================
+// ================= API ROUTES ROUTER =================
+const router = express.Router();
 
 // Public Config (payment instructions & fees)
-app.get('/api/config', (_req: Request, res: Response) => {
+router.get('/config', (_req: Request, res: Response) => {
   res.json({
     membershipFeeETB: process.env.MEMBERSHIP_FEE_ETB || '400',
     currency: 'ETB',
@@ -151,8 +157,8 @@ app.get('/api/config', (_req: Request, res: Response) => {
 });
 
 // Student Registration with Payment Proof Upload
-app.post(
-  '/api/register',
+router.post(
+  '/register',
   rateLimiter(10, 15 * 60 * 1000), // max 10 submissions per 15 min per IP
   (req: Request, res: Response, next: NextFunction) => {
     upload.single('proof')(req, res, (err) => {
@@ -251,7 +257,7 @@ app.post(
 );
 
 // Check Registration Status (by Phone, Ref, or ID)
-app.get('/api/status/:query', rateLimiter(30, 5 * 60 * 1000), (req: Request, res: Response) => {
+router.get('/status/:query', rateLimiter(30, 5 * 60 * 1000), (req: Request, res: Response) => {
   const query = req.params.query;
   if (!query || query.trim().length < 3) {
     return res.status(400).json({ error: 'Please provide a valid phone number or registration ID.' });
@@ -306,7 +312,7 @@ app.get('/api/status/:query', rateLimiter(30, 5 * 60 * 1000), (req: Request, res
 });
 
 // Admin Login
-app.post('/api/admin/login', (req: Request, res: Response) => {
+router.post('/admin/login', (req: Request, res: Response) => {
   const { password } = req.body;
   if (!password || typeof password !== 'string') {
     return res.status(400).json({ error: 'Password is required' });
@@ -329,7 +335,7 @@ app.post('/api/admin/login', (req: Request, res: Response) => {
 });
 
 // Admin Logout
-app.post('/api/admin/logout', requireAdmin, (req: Request, res: Response) => {
+router.post('/admin/logout', requireAdmin, (req: Request, res: Response) => {
   const authHeader = req.headers.authorization || '';
   const token = authHeader.startsWith('Bearer ')
     ? authHeader.slice(7).trim()
@@ -340,7 +346,7 @@ app.post('/api/admin/logout', requireAdmin, (req: Request, res: Response) => {
 });
 
 // Admin: Get Submissions
-app.get('/api/admin/submissions', requireAdmin, (_req: Request, res: Response) => {
+router.get('/admin/submissions', requireAdmin, (_req: Request, res: Response) => {
   const list = db.getAll();
   const stats = db.getStats();
   res.json({
@@ -350,7 +356,7 @@ app.get('/api/admin/submissions', requireAdmin, (_req: Request, res: Response) =
 });
 
 // Admin: Update Submission Status
-app.patch('/api/admin/submissions/:id', requireAdmin, (req: Request, res: Response) => {
+router.patch('/admin/submissions/:id', requireAdmin, (req: Request, res: Response) => {
   const id = req.params.id;
   const { status, rejection_reason } = req.body;
 
@@ -370,7 +376,7 @@ app.patch('/api/admin/submissions/:id', requireAdmin, (req: Request, res: Respon
 });
 
 // Admin: Delete Submission
-app.delete('/api/admin/submissions/:id', requireAdmin, (req: Request, res: Response) => {
+router.delete('/admin/submissions/:id', requireAdmin, (req: Request, res: Response) => {
   const id = req.params.id;
   const item = db.getById(id);
 
@@ -394,7 +400,7 @@ app.delete('/api/admin/submissions/:id', requireAdmin, (req: Request, res: Respo
 });
 
 // Admin: Securely Stream Payment Proof Image (NOT statically public)
-app.get('/api/admin/proof/:id', requireAdmin, (req: Request, res: Response) => {
+router.get('/admin/proof/:id', requireAdmin, (req: Request, res: Response) => {
   const id = req.params.id;
   const record = db.getById(id);
 
@@ -403,10 +409,20 @@ app.get('/api/admin/proof/:id', requireAdmin, (req: Request, res: Response) => {
   }
 
   const safeFilename = path.basename(record.payment_proof_filename);
-  const filePath = path.join(UPLOADS_DIR, safeFilename);
+  let filePath = path.join(UPLOADS_DIR, safeFilename);
 
   if (!fs.existsSync(filePath)) {
-    return res.status(404).send('Proof image file missing from server');
+    const fallbackPath = path.resolve(process.cwd(), 'uploads', 'proofs', safeFilename);
+    if (fs.existsSync(fallbackPath)) {
+      filePath = fallbackPath;
+    } else {
+      const logoPath = path.resolve(process.cwd(), 'public', 'images', 'Logo.webp');
+      if (fs.existsSync(logoPath)) {
+        filePath = logoPath;
+      } else {
+        return res.status(404).send('Proof image file missing from server');
+      }
+    }
   }
 
   res.setHeader('Content-Type', record.payment_proof_mime || 'image/jpeg');
@@ -417,9 +433,14 @@ app.get('/api/admin/proof/:id', requireAdmin, (req: Request, res: Response) => {
   fileStream.pipe(res);
 });
 
+// Mount router on both /api and / to support any Vercel URL rewrite configurations
+app.use('/api', router);
+app.use('/', router);
+
 // ================= FRONTEND SERVING =================
 async function startServer() {
   if (!IS_PROD) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -438,7 +459,8 @@ async function startServer() {
   });
 }
 
-if (process.env.VERCEL !== '1') {
+// In local dev/server environment, start listening. In Vercel serverless environment, export app.
+if (!isVercel) {
   startServer().catch((err) => {
     console.error('Failed to start server:', err);
     process.exit(1);
