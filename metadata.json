@@ -1,0 +1,6 @@
+{
+  "name": "Aplus Academy | Online Learning Community & Paid Membership",
+  "description": "Empowering Ethiopian university students with expert tutorials, past exams, study resources, and one-time membership access to the private Telegram learning community.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
