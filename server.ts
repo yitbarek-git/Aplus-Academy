@@ -139,6 +139,18 @@ router.use((_req, res, next) => {
 
 // Public Config (payment instructions & fees)
 router.get('/config', (_req: Request, res: Response) => {
+  const publicPaymentValues = [
+    process.env.VITE_TELEBIRR_ACCOUNT_NAME,
+    process.env.VITE_TELEBIRR_PHONE_NUMBER,
+    process.env.VITE_CBE_ACCOUNT_NAME,
+    process.env.VITE_CBE_ACCOUNT_NUMBER,
+    process.env.VITE_BOA_ACCOUNT_NAME,
+    process.env.VITE_BOA_ACCOUNT_NUMBER,
+  ];
+  if (publicPaymentValues.some((value) => !value?.trim() || /(?:x{3,}|placeholder|set in \.env)/i.test(value))) {
+    return res.status(503).json({ error: 'Public payment configuration is incomplete.' });
+  }
+
   res.json({
     membershipFee: '400',
     // Keep the existing response key for already-installed clients.
@@ -149,8 +161,8 @@ router.get('/config', (_req: Request, res: Response) => {
       {
         id: 'telebirr',
         name: 'Telebirr',
-        accountName: process.env.TELEBIRR_ACCOUNT_NAME || 'Aplus Academy / Yitbarek',
-        accountNumber: process.env.TELEBIRR_PHONE_NUMBER || '09XXXXXXXX (Set in .env)',
+        accountName: process.env.VITE_TELEBIRR_ACCOUNT_NAME!,
+        accountNumber: process.env.VITE_TELEBIRR_PHONE_NUMBER!,
         badge: 'Recommended for Mobile',
         steps: [
           'Open your Telebirr app or dial *127#',
@@ -162,8 +174,8 @@ router.get('/config', (_req: Request, res: Response) => {
       {
         id: 'cbe',
         name: 'Commercial Bank of Ethiopia (CBE)',
-        accountName: process.env.CBE_ACCOUNT_NAME || 'Yitbarek Kifleyohans',
-        accountNumber: process.env.CBE_ACCOUNT_NUMBER || '1000XXXXXXXXX (Set in .env)',
+        accountName: process.env.VITE_CBE_ACCOUNT_NAME!,
+        accountNumber: process.env.VITE_CBE_ACCOUNT_NUMBER!,
         badge: 'CBEBirr & Mobile Banking',
         steps: [
           'Transfer via CBE Mobile Banking, CBEBirr, or Bank Branch',
@@ -174,8 +186,8 @@ router.get('/config', (_req: Request, res: Response) => {
       {
         id: 'boa',
         name: 'Bank of Abyssinia (BOA)',
-        accountName: process.env.BOA_ACCOUNT_NAME || 'Yitbarek Kifleyohans',
-        accountNumber: process.env.BOA_ACCOUNT_NUMBER || 'XXXXXXXXX (Set in .env)',
+        accountName: process.env.VITE_BOA_ACCOUNT_NAME!,
+        accountNumber: process.env.VITE_BOA_ACCOUNT_NUMBER!,
         badge: 'Mobile Banking',
         steps: [
           'Transfer via BOA Mobile Banking app to the account above',
@@ -331,6 +343,9 @@ router.get('/status/:query', rateLimiter(30, 5 * 60 * 1000), (req: Request, res:
   if (record.status === 'approved') {
     // Only return the secret Telegram link when verified!
     const inviteLink = process.env.TELEGRAM_PRIVATE_INVITE_LINK;
+    if (!inviteLink) {
+      return res.status(503).json({ error: 'Student access is temporarily unavailable. Please contact support.' });
+    }
 
     return res.json({
       status: 'approved',

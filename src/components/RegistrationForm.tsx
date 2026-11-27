@@ -129,6 +129,15 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     e.preventDefault();
     setErrorMsg(null);
 
+    if (!config) {
+      setErrorMsg(
+        lang === 'am'
+          ? 'የክፍያ መረጃዎች አልተዋቀሩም። እባክዎ ድጋፍን ያነጋግሩ።'
+          : 'Payment details are not configured. Please contact support before paying.',
+      );
+      return;
+    }
+
     if (!fullName.trim() || fullName.trim().length < 3) {
       setErrorMsg(
         lang === 'am'
@@ -226,41 +235,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   };
 
   const fee = config?.membershipFee || '400';
-  const methods = config?.paymentMethods || [
-    {
-      id: 'telebirr',
-      name: 'Telebirr (ቴሌብር)',
-      accountName: 'Aplus Academy / Yitbarek',
-      accountNumber: '09XXXXXXXX (Set in .env)',
-      badge: lang === 'am' ? 'በስልክ ፈጣኑ መንገድ' : 'Fastest via Mobile',
-      steps: [
-        lang === 'am' ? 'የ400 ብር ክፍያውን ወደ ቴሌብር ቁጥሩ ይላኩ' : 'Send the 400 ETB fee to the Telebirr phone number',
-        lang === 'am' ? 'የደረሰኝ መልዕክቱን ስክሪንሽት ያንሱ' : 'Screenshot the confirmation SMS / receipt',
-      ],
-    },
-    {
-      id: 'cbe',
-      name: 'Commercial Bank of Ethiopia (CBE)',
-      accountName: 'Yitbarek Kifleyohans',
-      accountNumber: '1000XXXXXXXXX (Set in .env)',
-      badge: lang === 'am' ? 'ንግድ ባንክ / CBEBirr' : 'CBE Mobile / CBEBirr',
-      steps: [
-        lang === 'am' ? 'ወደተጠቀሰው የንግድ ባንክ ሂሳብ ቁጥር ያስተላልፉ' : 'Transfer to the CBE account number',
-        lang === 'am' ? 'የደረሰኙን ስክሪንሽት ያስቀምጡ' : 'Save the transfer receipt screenshot',
-      ],
-    },
-    {
-      id: 'boa',
-      name: 'Bank of Abyssinia (BOA)',
-      accountName: 'Yitbarek Kifleyohans',
-      accountNumber: 'XXXXXXXXX (Set in .env)',
-      badge: lang === 'am' ? 'አቢሲኒያ ባንክ' : 'BOA Mobile Banking',
-      steps: [
-        lang === 'am' ? 'በአቢሲኒያ ሞባይል ባንኪንግ ያስተላልፉ' : 'Transfer to the BOA account number',
-        lang === 'am' ? 'የማረጋገጫ ምስሉን ያስቀምጡ' : 'Save the transfer confirmation screenshot',
-      ],
-    },
-  ];
+  const methods = config?.paymentMethods ?? [];
 
   return (
     <section id="register" className="py-24 bg-[#0a0d14] relative">
@@ -298,7 +273,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {methods.map((method) => (
+            {!config ? (
+              <div role="alert" className="md:col-span-3 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm">
+                {lang === 'am'
+                  ? 'የክፍያ መረጃዎች ለጊዜው አልተገኙም። ከመክፈልዎ በፊት ድጋፍን ያነጋግሩ።'
+                  : 'Payment details are unavailable. Contact support before making a payment.'}
+              </div>
+            ) : methods.map((method) => (
               <div
                 key={method.id}
                 onClick={() => setPaymentMethod(method.id)}
@@ -355,7 +336,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 </div>
 
                 <div className="pt-3 border-t border-[#1d2434] text-[11px] text-slate-400">
-                  {method.steps?.[0] || 'Transfer fee and take screenshot of receipt'}
+                  {method.steps[0]}
                 </div>
               </div>
             ))}
@@ -644,7 +625,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !config}
                   className="w-full py-4 rounded-xl font-bold text-base bg-[#16e016] hover:bg-[#12be12] text-black shadow-lg shadow-[#16e016]/25 hover:shadow-xl hover:shadow-[#16e016]/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? (

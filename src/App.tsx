@@ -15,8 +15,65 @@ import { TermsModal } from './components/TermsModal';
 import { AppConfig } from './types';
 import { Language } from './translations';
 
+const readPublicValue = (value: string | undefined): string => value?.trim() || '';
+const publicPaymentDetails = {
+  telebirrAccountName: readPublicValue(import.meta.env.VITE_TELEBIRR_ACCOUNT_NAME),
+  telebirrPhoneNumber: readPublicValue(import.meta.env.VITE_TELEBIRR_PHONE_NUMBER),
+  cbeAccountName: readPublicValue(import.meta.env.VITE_CBE_ACCOUNT_NAME),
+  cbeAccountNumber: readPublicValue(import.meta.env.VITE_CBE_ACCOUNT_NUMBER),
+  boaAccountName: readPublicValue(import.meta.env.VITE_BOA_ACCOUNT_NAME),
+  boaAccountNumber: readPublicValue(import.meta.env.VITE_BOA_ACCOUNT_NUMBER),
+};
+const containsPlaceholder = (value: string) => /(?:x{3,}|placeholder|set in \.env)/i.test(value);
+const publicConfigReady = Object.values(publicPaymentDetails).every(
+  (value) => value.length > 0 && !containsPlaceholder(value),
+);
+
+const appConfig: AppConfig | null = publicConfigReady
+  ? {
+      membershipFee: '400',
+      currency: 'ETB',
+      oneTimeOnly: true,
+      paymentMethods: [
+        {
+          id: 'telebirr',
+          name: 'Telebirr',
+          accountName: publicPaymentDetails.telebirrAccountName,
+          accountNumber: publicPaymentDetails.telebirrPhoneNumber,
+          badge: 'Recommended for Mobile',
+          steps: [
+            'Open your Telebirr app or dial *127#',
+            'Send the one-time fee to the Telebirr phone number',
+          ],
+        },
+        {
+          id: 'cbe',
+          name: 'Commercial Bank of Ethiopia (CBE)',
+          accountName: publicPaymentDetails.cbeAccountName,
+          accountNumber: publicPaymentDetails.cbeAccountNumber,
+          badge: 'CBEBirr & Mobile Banking',
+          steps: ['Transfer to the CBE account number'],
+        },
+        {
+          id: 'boa',
+          name: 'Bank of Abyssinia (BOA)',
+          accountName: publicPaymentDetails.boaAccountName,
+          accountNumber: publicPaymentDetails.boaAccountNumber,
+          badge: 'Mobile Banking',
+          steps: ['Transfer to the BOA account number'],
+        },
+      ],
+      supportContacts: {
+        telegram: '@Yitbarek_2',
+        telegramChannel: 'https://t.me/aplusacademy11',
+        youtube: 'https://www.youtube.com/@aplusacademy1',
+        email: 'ykifleyohans@gmail.com',
+      },
+    }
+  : null;
+
 export default function App() {
-  const [config, setConfig] = useState<AppConfig | null>(null);
+  const config = appConfig;
   const [selectedCourse, setSelectedCourse] = useState('All Courses (Complete Academy Access)');
   const [statusCheckOpen, setStatusCheckOpen] = useState(false);
   const [statusPhoneQuery, setStatusPhoneQuery] = useState('');
@@ -38,13 +95,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
-
-  useEffect(() => {
-    fetch('/api/config')
-      .then((res) => res.json())
-      .then((data) => setConfig(data))
-      .catch((err) => console.error('Failed to load app config:', err));
-  }, []);
 
   const handleOpenStatusCheckWithPhone = (phone: string) => {
     setStatusPhoneQuery(phone);
