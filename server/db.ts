@@ -120,17 +120,11 @@ export const db = {
     
     return list.find((item) => {
       const cleanPhone = (item.phone || '').trim().toLowerCase().replace(/[\s\-\+]/g, '');
-      const cleanRef = (item.transaction_reference || '').trim().toLowerCase();
       const cleanId = item.id.toLowerCase();
-      const cleanTg = (item.telegram_username || '').trim().toLowerCase().replace('@', '');
 
       return (
         cleanPhone === cleanQuery ||
-        cleanPhone.endsWith(cleanQuery) ||
-        cleanQuery.endsWith(cleanPhone) ||
-        cleanRef === cleanQuery ||
-        cleanId === cleanQuery ||
-        cleanTg === cleanQuery
+        cleanId === cleanQuery
       );
     });
   },

@@ -5,5 +5,4 @@ export const config = {
     bodyParser: false,
   },
 };
-
 export default app;

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Aplus Academy</string>
+    <string name="error_no_internet_title">Aplus Academy could not connect to the internet.</string>
+    <string name="error_no_internet_subtitle">Please check your mobile data or Wi-Fi connection and tap Try Again.</string>
+    <string name="btn_try_again">Try Again</string>
+    <string name="loading_aplus">Loading Aplus Academy…</string>
+    <string name="telegram_not_found">Telegram app is not installed. Opening in browser…</string>
+    <string name="download_started">Downloading file…</string>
+    <string name="choose_file">Select Payment Receipt / Document</string>
+</resources>

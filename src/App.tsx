@@ -36,6 +36,10 @@ export default function App() {
   };
 
   useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  useEffect(() => {
     fetch('/api/config')
       .then((res) => res.json())
       .then((data) => setConfig(data))

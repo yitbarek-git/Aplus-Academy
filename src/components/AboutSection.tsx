@@ -49,7 +49,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ lang }) => {
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#181d2c] border border-[#262f44] text-xs text-slate-300 hover:text-white transition-colors"
               >
                 <Youtube className="w-3.5 h-3.5 text-red-500" />
-                <span>11.4K Subscribers</span>
+                <span>20K+ Subscribers</span>
               </a>
 
               <a

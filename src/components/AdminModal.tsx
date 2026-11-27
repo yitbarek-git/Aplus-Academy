@@ -282,7 +282,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter admin password (e.g. aplus_admin_2026)"
+                    placeholder="Enter the configured administrator password"
                     className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#090b10] border border-[#242c40] text-white text-sm focus:outline-none focus:border-[#16e016]"
                   />
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Search,
   CheckCircle2,
@@ -35,6 +35,14 @@ export const StatusChecker: React.FC<StatusCheckerProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<StatusResult | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setQuery(initialQuery);
+      setError(null);
+      setResult(null);
+    }
+  }, [initialQuery, isOpen]);
 
   if (!isOpen) return null;
 
@@ -79,7 +87,7 @@ export const StatusChecker: React.FC<StatusCheckerProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-[#111522] border border-[#232b3d] rounded-3xl p-6 sm:p-8 shadow-2xl text-left">
+      <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#111522] border border-[#232b3d] rounded-3xl p-5 sm:p-8 shadow-2xl text-left">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -102,19 +110,20 @@ export const StatusChecker: React.FC<StatusCheckerProps> = ({
         </p>
 
         {/* Search input form */}
-        <form onSubmit={handleSearch} className="flex gap-2 mb-6">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2 mb-6">
           <input
             type="text"
             required
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t.inputPlaceholder}
-            className="flex-1 px-4 py-3 rounded-xl bg-[#090b10] border border-[#21293c] text-white text-sm focus:outline-none focus:border-[#16e016] transition-colors"
+            aria-label={lang === 'am' ? 'ስልክ ቁጥር ወይም የምዝገባ መለያ' : 'Phone number or registration ID'}
+            className="min-w-0 w-full flex-1 px-4 py-3 rounded-xl bg-[#090b10] border border-[#21293c] text-white text-sm focus:outline-none focus:border-[#16e016] transition-colors"
           />
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-3 rounded-xl font-bold text-sm bg-[#16e016] hover:bg-[#12be12] text-black transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="w-full sm:w-auto justify-center px-5 py-3 rounded-xl font-bold text-sm bg-[#16e016] hover:bg-[#12be12] text-black transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>{t.searchBtn}</span>}
           </button>

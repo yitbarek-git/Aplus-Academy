@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Green Accent Ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#16E016"
+        android:strokeWidth="3"
+        android:pathData="M54,18 A36,36 0 1,1 53.9,18" />
+
+    <!-- A+ stylized badge text/symbol -->
+    <!-- Letter A -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44,68 L48.5,54 L39.5,54 Z M41.5,40 L30,72 L37,72 L39.5,64 L48.5,64 L51,72 L58,72 L46.5,40 Z" />
+
+    <!-- Plus Sign in Neon Green -->
+    <path
+        android:fillColor="#16E016"
+        android:pathData="M66,48 L72,48 L72,54 L78,54 L78,60 L72,60 L72,66 L66,66 L66,60 L60,60 L60,54 L66,54 Z" />
+</vector>

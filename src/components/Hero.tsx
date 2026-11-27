@@ -1,7 +1,13 @@
-import React from 'react';
-import { ArrowRight, CheckCircle2, ShieldCheck, PlayCircle, BookOpen } from 'lucide-react';
-import { AppConfig } from '../types';
-import { Language, translations } from '../translations';
+import React from "react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  PlayCircle,
+  BookOpen,
+} from "lucide-react";
+import { AppConfig } from "../types";
+import { Language, translations } from "../translations";
 
 interface HeroProps {
   lang: Language;
@@ -11,11 +17,14 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
   const t = translations[lang].hero;
   const feeDisplay = config?.membershipFeeETB
-    ? `${config.membershipFeeETB} ${lang === 'am' ? 'ብር' : 'ETB'}`
-    : `400 ${lang === 'am' ? 'ብር' : 'ETB'}`;
+    ? `${config.membershipFeeETB} ${lang === "am" ? "ብር" : "ETB"}`
+    : `300 ${lang === "am" ? "ብር" : "ETB"}`;
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section
+      id="home"
+      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
+    >
       {/* Decorative background glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#16e016]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -31,7 +40,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] mb-6 font-['Poppins']">
-              {t.titleMain}{' '}
+              {t.titleMain}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#16e016] via-[#4ade80] to-amber-300">
                 {t.titleHighlight}
               </span>
@@ -99,22 +108,30 @@ export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
                     className="w-14 h-14 rounded-2xl border-2 border-[#16e016] shadow-md shadow-[#16e016]/30"
                   />
                   <div>
-                    <h3 className="font-bold text-white text-base">Aplus Academy</h3>
-                    <p className="text-xs text-slate-400">Your Path to Excellence</p>
+                    <h3 className="font-bold text-white text-base">
+                      Aplus Academy
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Your Path to Excellence
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <span className="text-[11px] uppercase tracking-wider text-emerald-400 font-bold block">
                     {t.hubBadge}
                   </span>
-                  <span className="text-sm font-extrabold text-white">{feeDisplay}</span>
+                  <span className="text-sm font-extrabold text-white">
+                    {feeDisplay}
+                  </span>
                 </div>
               </div>
 
               {/* Center Highlight */}
               <div className="my-6 p-4 rounded-2xl bg-[#0d1017] border border-[#21283a]">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-slate-400 font-medium">Community Platform</span>
+                  <span className="text-xs text-slate-400 font-medium">
+                    Community Platform
+                  </span>
                   <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#16e016]/20 text-[#16e016] font-semibold">
                     Private Telegram Group
                   </span>
@@ -122,19 +139,27 @@ export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
                 <div className="text-xs text-slate-300 space-y-1.5">
                   <p className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#16e016]" />
-                    {lang === 'am' ? 'የሁሉም ኮርሶች የተሟላ ቪዲዮዎች' : 'Full access to all course tutorial playlists'}
+                    {lang === "am"
+                      ? "የሁሉም ኮርሶች የተሟላ ቪዲዮዎች"
+                      : "Full access to all course tutorial playlists"}
                   </p>
                   <p className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#16e016]" />
-                    {lang === 'am' ? 'ትክክለኛ ያለፉ ሚድ እና ፋይናል ፈተናዎች' : 'Authentic previous midterm & final campus exams'}
+                    {lang === "am"
+                      ? "ትክክለኛ ያለፉ ሚድ እና ፋይናል ፈተናዎች"
+                      : "Authentic previous midterm & final campus exams"}
                   </p>
                   <p className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#16e016]" />
-                    {lang === 'am' ? 'የተጠቃለሉ የፒዲኤፍ ማስታወሻዎች' : 'Summarized lecture notes & printable study guides'}
+                    {lang === "am"
+                      ? "የተጠቃለሉ የፒዲኤፍ ማስታወሻዎች"
+                      : "Summarized lecture notes & printable study guides"}
                   </p>
                   <p className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#16e016]" />
-                    {lang === 'am' ? 'ከአስተማሪ ጋር የቀጥታ ጥያቄና መልስ' : 'Direct student Q&A with instructor'}
+                    {lang === "am"
+                      ? "ከአስተማሪ ጋር የቀጥታ ጥያቄና መልስ"
+                      : "Direct student Q&A with instructor"}
                   </p>
                 </div>
               </div>
@@ -142,16 +167,28 @@ export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
               {/* Verified Channel Stats */}
               <div className="grid grid-cols-3 gap-3 pt-2 text-center">
                 <div className="p-3 rounded-xl bg-[#121622] border border-[#202738]">
-                  <span className="block text-lg sm:text-xl font-extrabold text-[#16e016]">11.4K+</span>
-                  <span className="text-[11px] text-slate-400 font-medium">{t.statStudents}</span>
+                  <span className="block text-lg sm:text-xl font-extrabold text-[#16e016]">
+                    25.4K+
+                  </span>
+                  <span className="text-[11px] text-slate-400 font-medium">
+                    {t.statStudents}
+                  </span>
                 </div>
                 <div className="p-3 rounded-xl bg-[#121622] border border-[#202738]">
-                  <span className="block text-lg sm:text-xl font-extrabold text-amber-400">44+</span>
-                  <span className="text-[11px] text-slate-400 font-medium">{t.statVideos}</span>
+                  <span className="block text-lg sm:text-xl font-extrabold text-amber-400">
+                    100+
+                  </span>
+                  <span className="text-[11px] text-slate-400 font-medium">
+                    {t.statVideos}
+                  </span>
                 </div>
                 <div className="p-3 rounded-xl bg-[#121622] border border-[#202738]">
-                  <span className="block text-lg sm:text-xl font-extrabold text-emerald-400">2017 E.C</span>
-                  <span className="text-[11px] text-slate-400 font-medium">{t.statEstablished}</span>
+                  <span className="block text-lg sm:text-xl font-extrabold text-emerald-400">
+                    2017 E.C
+                  </span>
+                  <span className="text-[11px] text-slate-400 font-medium">
+                    {t.statEstablished}
+                  </span>
                 </div>
               </div>
 
