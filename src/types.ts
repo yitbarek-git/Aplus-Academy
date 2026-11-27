@@ -8,7 +8,7 @@ export interface PaymentMethodConfig {
 }
 
 export interface AppConfig {
-  membershipFeeETB: string;
+  membershipFee: string;
   currency: string;
   oneTimeOnly: boolean;
   paymentMethods: PaymentMethodConfig[];

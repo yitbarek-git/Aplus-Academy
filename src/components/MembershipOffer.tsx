@@ -10,7 +10,7 @@ interface MembershipOfferProps {
 
 export const MembershipOffer: React.FC<MembershipOfferProps> = ({ lang, config }) => {
   const t = translations[lang].membership;
-  const fee = config?.membershipFeeETB || '400';
+  const fee = config?.membershipFee || '400';
 
   return (
     <section id="membership" className="py-24 bg-[#090b10] relative">

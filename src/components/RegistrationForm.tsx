@@ -225,7 +225,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     }
   };
 
-  const fee = config?.membershipFeeETB || '400';
+  const fee = config?.membershipFee || '400';
   const methods = config?.paymentMethods || [
     {
       id: 'telebirr',

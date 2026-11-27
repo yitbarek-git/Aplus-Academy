@@ -140,7 +140,9 @@ router.use((_req, res, next) => {
 // Public Config (payment instructions & fees)
 router.get('/config', (_req: Request, res: Response) => {
   res.json({
-    membershipFeeETB: process.env.MEMBERSHIP_FEE_ETB || '400',
+    membershipFee: '400',
+    // Keep the existing response key for already-installed clients.
+    membershipFeeETB: '400',
     currency: 'ETB',
     oneTimeOnly: true,
     paymentMethods: [

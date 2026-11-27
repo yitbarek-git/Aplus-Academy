@@ -16,9 +16,9 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ lang, config }) => {
   const t = translations[lang].hero;
-  const feeDisplay = config?.membershipFeeETB
-    ? `${config.membershipFeeETB} ${lang === "am" ? "ብር" : "ETB"}`
-    : `300 ${lang === "am" ? "ብር" : "ETB"}`;
+  const feeDisplay = config?.membershipFee
+    ? `${config.membershipFee} ${lang === "am" ? "ብር" : "ETB"}`
+    : `400 ${lang === "am" ? "ብር" : "ETB"}`;
 
   return (
     <section
